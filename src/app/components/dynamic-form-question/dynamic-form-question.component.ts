@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
-
+import {Component, Input} from '@angular/core';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {QuestionBase} from '../../models/question-base/question-base.module';
 @Component({
-  selector: 'app-dynamic-form-question',
   standalone: true,
-  imports: [],
+  selector: 'app-question',
   templateUrl: './dynamic-form-question.component.html',
-  styleUrl: './dynamic-form-question.component.scss'
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class DynamicFormQuestionComponent {
-
+  @Input() question!: QuestionBase<string>;
+  @Input() form!: FormGroup;
+  get isValid() {
+    return this.form.controls[this.question.key].valid;
+  }
 }
