@@ -1,56 +1,23 @@
-import {Injectable} from '@angular/core';
-import {DropdownQuestion} from '../models/question-dropdown/question-dropdown.module';
-import {QuestionBase} from '../models/question-base/question-base.module';
-import {TextboxQuestion} from '../models/question-texbox/question-texbox.module';
-import {of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { DropdownQuestion } from '../models/question-dropdown/question-dropdown.module';
+import { QuestionBase } from '../models/question-base/question-base.module';
+import { TextboxQuestion } from '../models/question-texbox/question-texbox.module';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, of, Subscription } from 'rxjs';
+
 @Injectable()
 export class QuestionService {
-  // TODO: get from a remote source of question metadata
-  getQuestions() {
-    const questions: QuestionBase<string>[] = [
-      new TextboxQuestion({
-        key: 'firstName',
-        label: 'Firstname',
-        required: true,
-        order: 1,
-        sizeInput: 'field col-6',
-      }),
-      new TextboxQuestion({
-        key: 'lastName',
-        label: 'Lastname',
-        required: true,
-        order: 2,
-        sizeInput: 'field col-6',
-      }),
-      new TextboxQuestion({
-        key: 'address',
-        label: 'Address',
-        required: true,
-        order: 3,
-        sizeInput: 'field col-12',
-      }),
-      new TextboxQuestion({
-        key: 'city',
-        label: 'City',
-        required: true,
-        order: 4,
-        sizeInput: 'field col-4',
-      }),
-      new DropdownQuestion({
-        key: 'state',
-        label: 'State',
-        options: [
-          {key: 'arizona', value: 'Arizona'},
-          {key: 'california', value: 'California'},
-          {key: 'florida', value: 'Florida'},
-          {key: 'ohio', value: 'Ohio'},
-          {key: 'washington', value: 'Washington'},
-        ],
-        required: true,
-        order: 5,
-        sizeInput: 'field col-3',
-      }),
-    ];
-    return of(questions.sort((a, b) => a.order - b.order));
+  constructor(private http: HttpClient) {}
+
+  configUrl = 'https://360f61b3-f218-4700-b82d-d8ea385acb8a.mock.pstmn.io/dinamyc_form';
+
+  getConfig(): Observable<QuestionBase<string>[]> {
+    return this.http.get<QuestionBase<string>[]>(this.configUrl).pipe(
+      map(value => value.sort((a, b) => a.order - b.order))
+    );
+  }
+  
+  public getQuestions(): Observable<QuestionBase<string>[]> {
+    return this.getConfig();
   }
 }

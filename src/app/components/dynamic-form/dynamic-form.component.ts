@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {DynamicFormQuestionComponent} from '../dynamic-form-question/dynamic-form-question.component';
@@ -16,8 +16,9 @@ export class DynamicFormComponent implements OnInit {
   @Input() questions: QuestionBase<string>[] | null = [];
   form!: FormGroup;
   payLoad = '';
-  constructor(private qcs: QuestionControlService) {}
+  constructor(private qcs: QuestionControlService, private cdr: ChangeDetectorRef) {}
   ngOnInit() {
+    console.log("dataForm",this.questions)
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
   onSubmit() {

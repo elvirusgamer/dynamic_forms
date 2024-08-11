@@ -1,9 +1,9 @@
 <div [formGroup]="form">
     <label [attr.for]="question.key">{{ question.label }}</label>
       @switch (question.controlType) {
-        @case ('textbox') {
+        @case ('TextboxQuestion') {
           <input [formControlName]="question.key" [id]="question.key" [type]="question.type" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-        } @case ('dropdown') {
+        } @case ('DropdownQuestion') {
           <select [id]="question.key" [formControlName]="question.key" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
             @for (opt of question.options; track opt) {
               <option [value]="opt.key">{{ opt.value }}</option>
