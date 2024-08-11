@@ -9,46 +9,46 @@ export class QuestionService {
   getQuestions() {
     const questions: QuestionBase<string>[] = [
       new TextboxQuestion({
-        key: 'ejemplo',
-        label: 'esto es un ejemplo',
-        required: false,
+        key: 'firstName',
+        label: 'Firstname',
+        required: true,
         order: 1,
-      }),
-      new DropdownQuestion({
-        key: 'favoriteAnimal',
-        label: 'Favorite Animal',
-        options: [
-          {key: 'cat', value: 'Cat'},
-          {key: 'dog', value: 'Dog'},
-          {key: 'horse', value: 'Horse'},
-          {key: 'capybara', value: 'Capybara'},
-        ],
-        order: 5,
+        sizeInput: 'field col-6',
       }),
       new TextboxQuestion({
-        key: 'firstName',
-        label: 'First name',
+        key: 'lastName',
+        label: 'Lastname',
         required: true,
         order: 2,
+        sizeInput: 'field col-6',
       }),
       new TextboxQuestion({
-        key: 'ejemplo',
-        label: 'ejemplo',
-        required: true,
-        order: 6,
-      }),
-      new TextboxQuestion({
-        key: 'SecundtName',
-        label: 'Secund name',
+        key: 'address',
+        label: 'Address',
         required: true,
         order: 3,
+        sizeInput: 'field col-12',
       }),
       new TextboxQuestion({
-        key: 'emailAddress',
-        label: 'Email',
-        type: 'email',
+        key: 'city',
+        label: 'City',
         required: true,
         order: 4,
+        sizeInput: 'field col-4',
+      }),
+      new DropdownQuestion({
+        key: 'state',
+        label: 'State',
+        options: [
+          {key: 'arizona', value: 'Arizona'},
+          {key: 'california', value: 'California'},
+          {key: 'florida', value: 'Florida'},
+          {key: 'ohio', value: 'Ohio'},
+          {key: 'washington', value: 'Washington'},
+        ],
+        required: true,
+        order: 5,
+        sizeInput: 'field col-3',
       }),
     ];
     return of(questions.sort((a, b) => a.order - b.order));

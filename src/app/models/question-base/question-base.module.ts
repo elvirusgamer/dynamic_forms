@@ -7,6 +7,8 @@ export class QuestionBase<T> {
   controlType: string;
   type: string;
   options: {key: string; value: string}[];
+  sizeInput: string;  // Nueva propiedad
+
   constructor(
     options: {
       value?: T;
@@ -17,6 +19,7 @@ export class QuestionBase<T> {
       controlType?: string;
       type?: string;
       options?: {key: string; value: string}[];
+      sizeInput?: string;  // Nueva propiedad en el constructor
     } = {},
   ) {
     this.value = options.value;
@@ -27,5 +30,6 @@ export class QuestionBase<T> {
     this.controlType = options.controlType || '';
     this.type = options.type || '';
     this.options = options.options || [];
+    this.sizeInput = options.sizeInput || 'col-12';  // Valor por defecto
   }
 }
