@@ -9,6 +9,35 @@
               <option [value]="opt.key">{{ opt.value }}</option>
             }
           </select>
+        } @case ('CheckboxQuestion') {
+          <div>
+            <p-checkbox [formControlName]="question.key" [id]="question.key" [binary]="true" inputId="binary"/>
+          </div>
+        } @case ('TextareaQuestion') {
+          <div>
+            <textarea [formControlName]="question.key" [id]="question.key" rows="3" cols="100" pInputTextarea></textarea>
+          </div>
+        } @case ('InputswitchQuestion') {
+          <div>
+            <p-inputSwitch formControlName="checked" [formControlName]="question.key" [id]="question.key"/> 
+          </div>
+        }
+        @case ('CalendarQuestion') {
+          <div>
+              <p-calendar formControlName="date" [formControlName]="question.key" [id]="question.key" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay"/>
+          </div>
+        }@case ('PasswordQuestion') {
+          <div>
+            <p-password formControlName="value" [feedback]="false" [formControlName]="question.key" [id]="question.key" [toggleMask]="true"/>
+          </div>
+        }@case ('InputnumberQuestion') {
+          <div>
+            <p-inputNumber variant="filled" [formControlName]="question.key" [id]="question.key"/>
+          </div>
+        }@case ('PricesQuestion') {
+          <div>
+            <p-inputNumber [showButtons]="true" inputId="stacked" mode="currency" currency="USD" [formControlName]="question.key" [id]="question.key"/> 
+          </div>
         }
       }
     @if (!isValid) {<div class="errorMessage" style="color:rgb(255, 0, 0)">{{ question.label }} is required</div>}

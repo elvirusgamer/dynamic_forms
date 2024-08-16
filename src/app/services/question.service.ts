@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DropdownQuestion } from '../models/question-dropdown/question-dropdown.module';
+import { DropdownQuestion } from '../models/question-form/question-form.module';
 import { QuestionBase } from '../models/question-base/question-base.module';
-import { TextboxQuestion } from '../models/question-texbox/question-texbox.module';
+import { TextboxQuestion } from '../models/question-form/question-form.module';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, of, Subscription } from 'rxjs';
 
