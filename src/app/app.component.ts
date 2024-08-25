@@ -8,13 +8,15 @@ import { PanelModule } from 'primeng/panel';
 import { SidebarHeadlessDemo } from './components/sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarResponse } from './models/sidebar-response/sidebar-response.module';
+import { SidebarComponent } from './custom_components/sidebar/sidebar.component' 
+import { RouterModule } from '@angular/router';  // Importa RouterModule
 
 @Component({
   standalone: true,
   selector: 'app-root',
   template: ` 
-    <div class="grid">
-      <div class="col-3">
+      <div class="grid">
+      <div class="col-1">
         <div class="p-3 border-round-sm font-bold">
           <ng-container *ngIf="sidebarItems$ | async as sidebarItems; else loadingSidebar">
             <app-sidebar [sidebarData]="sidebarItems$ | async"></app-sidebar>
@@ -46,7 +48,8 @@ import { SidebarResponse } from './models/sidebar-response/sidebar-response.modu
     PanelModule,
     SidebarHeadlessDemo,
     HttpClientModule,
-    
+    SidebarComponent,
+    RouterModule,  // Asegúrate de que esté importado aquí
   ],
 })
 

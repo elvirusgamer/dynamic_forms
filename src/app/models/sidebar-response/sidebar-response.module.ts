@@ -28,8 +28,10 @@ export class SidebarChild {
 
 export class ComponentItem {
   component: string;
+  link: string
 
-  constructor(component: string) {
+  constructor(component: string, link: string) {
     this.component = component;
+    this.link = link
   }
 }

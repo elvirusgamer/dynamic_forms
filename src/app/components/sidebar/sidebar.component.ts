@@ -6,21 +6,21 @@ import { AvatarModule } from 'primeng/avatar';
 import { StyleClassModule } from 'primeng/styleclass';
 import { Sidebar } from 'primeng/sidebar';
 import { SidebarResponse } from '../../models/sidebar-response/sidebar-response.module'
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-sidebar',
-    templateUrl: './sidebar.component.html',
-    standalone: true,
-    imports: [SidebarModule, ButtonModule, RippleModule, AvatarModule, StyleClassModule]
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  standalone: true,
+  imports: [SidebarModule, ButtonModule, RippleModule, AvatarModule, StyleClassModule, RouterModule]
 })
 export class SidebarHeadlessDemo {
-    @ViewChild('sidebarRef') sidebarRef!: Sidebar;
-    @Input() sidebarData!: SidebarResponse;
-    closeCallback(e: any): void {
-        this.sidebarRef.close(e);
-    }
+  @ViewChild('sidebarRef') sidebarRef!: Sidebar;
+  @Input() sidebarData!: SidebarResponse;
 
-    sidebarVisible: boolean = false;
+  closeCallback(e: any): void {
+    this.sidebarRef.close(e);
+  }
 
-    // Ejemplo de datos JSON
+  sidebarVisible: boolean = false;
 }
