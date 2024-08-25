@@ -7,26 +7,21 @@ import { Observable } from 'rxjs';
 import { PanelModule } from 'primeng/panel';
 import { SidebarHeadlessDemo } from './components/sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SidebarResponse } from './models/sidebar-response/sidebar-response.module';
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  template: `
-    <!-- <div>
-      <app-sidebar class="grid"></app-sidebar>
-      <p-panel
-        header="Dynamic Form"
-        [toggleable]="true"
-        class="grid card flex justify-content-center"
-      >
-        <app-dynamic-form [questions]="questions$ | async"></app-dynamic-form>
-      </p-panel>
-    </div> -->
-
+  template: ` 
     <div class="grid">
       <div class="col-3">
         <div class="p-3 border-round-sm font-bold">
-          <!-- <app-sidebar class="grid"></app-sidebar> -->
+          <ng-container *ngIf="sidebarItems$ | async as sidebarItems; else loadingSidebar">
+            <app-sidebar [sidebarData]="sidebarItems$ | async"></app-sidebar>
+          </ng-container>
+          <ng-template #loadingSidebar>
+            <p>Loading sidebar...</p>
+          </ng-template>
         </div>
       </div>
       <div class="col-12">
@@ -51,14 +46,18 @@ import { HttpClientModule } from '@angular/common/http';
     PanelModule,
     SidebarHeadlessDemo,
     HttpClientModule,
+    
   ],
 })
+
 export class AppComponent implements OnInit {
   private _serviceData = inject(QuestionService);
-
+  
   questions$!: Observable<QuestionBase<string>[]>;
+  sidebarItems$!: Observable<any>;
 
   ngOnInit(): void {
-    this.questions$ = this._serviceData.getQuestions();
+      this.questions$ = this._serviceData.getQuestions();
+      this.sidebarItems$ = this._serviceData.getItemSidebard();
   }
 }
